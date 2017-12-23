@@ -19,9 +19,9 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class Ranking {
 
     @JsonProperty("ranking")
-    private String ranking;
+    public String ranking;
     @JsonProperty("products")
-    private ArrayList<RankingProducts> products = null;
+    public ArrayList<RankingProducts> products = null;
     @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    public Map<String, Object> additionalProperties = new HashMap<String, Object>();
 }

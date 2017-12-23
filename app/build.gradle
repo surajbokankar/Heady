@@ -33,4 +33,5 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.2.3'
     implementation 'com.fasterxml.jackson.jr:jackson-jr-retrofit2:2.8.6'
     implementation 'com.squareup.retrofit2:converter-jackson:2.1.0'
+    implementation 'com.google.guava:guava:16.0.1'
 }
