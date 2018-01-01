@@ -1,5 +1,6 @@
 package com.example.surajbokankar.headytestapp.feature.category;
 
+import com.example.surajbokankar.headytestapp.feature.category.model.MenuModel;
 import com.example.surajbokankar.headytestapp.feature.category.pojo.ParentResponse;
 
 /**
@@ -8,7 +9,7 @@ import com.example.surajbokankar.headytestapp.feature.category.pojo.ParentRespon
 
 public interface OnCategoryAPISuccess {
 
-    public  void onCategoryAPiSuccess(ParentResponse parentResponse);
+    public  void onCategoryAPiSuccess(MenuModel parentResponse);
 
     public void onError(String error);
 }

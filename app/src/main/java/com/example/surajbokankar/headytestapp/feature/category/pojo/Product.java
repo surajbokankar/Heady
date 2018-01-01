@@ -1,5 +1,7 @@
 package com.example.surajbokankar.headytestapp.feature.category.pojo;
 
+import android.support.annotation.NonNull;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -19,7 +21,7 @@ import java.util.Map;
 "variants",
 "tax"
 })
-public class Product {
+public class Product  {
 
     @JsonProperty("id")
     public Integer id;
@@ -33,4 +35,6 @@ public class Product {
     public Tax tax;
     @JsonIgnore
     public Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+
 }

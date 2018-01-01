@@ -11,8 +11,8 @@ import java.util.ArrayList;
 public class MainMenuModel {
     public int id;
     public String categoryTitle=null;
-    public ArrayList<Product> productList=null;
-    public ArrayList<ChildCategoryModel> childCategoryModels=null;
+    public ArrayList<Product> productList=new ArrayList<>();
+    public ArrayList<ChildCategoryModel> childCategoryModels=new ArrayList<>();
 
 
 }

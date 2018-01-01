@@ -1,7 +1,6 @@
 package com.example.surajbokankar.headytestapp.util;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,24 +8,28 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 
+import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.AppCompatTextView;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.CalendarView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 import com.example.surajbokankar.headytestapp.R;
+import com.example.surajbokankar.headytestapp.feature.category.MenuClickListener;
+import com.example.surajbokankar.headytestapp.feature.category.adapter.ChildMenuAdapter;
+import com.example.surajbokankar.headytestapp.feature.category.adapter.SortListAdapter;
+import com.example.surajbokankar.headytestapp.feature.category.model.RankingListModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.text.DateFormat;
@@ -37,7 +40,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -98,7 +100,7 @@ public class CommonUtil {
 
     }
 
-    public static void showToast(Context context,String message) {
+    public  void showToast(Context context,String message) {
         if(context!=null)
             Toast.makeText(context,message,Toast.LENGTH_SHORT).show();
     }
@@ -136,6 +138,18 @@ public class CommonUtil {
         LinearLayoutManager horizontalLayoutManagaer
                 = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         return  horizontalLayoutManagaer;
+    }
+
+    public static LinearLayoutManager getGridLayoutManager(Context context){
+        GridLayoutManager gridLayoutManager
+                = new GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false);
+        /*gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                return (position % 3 == 0 ? 2 : 1);
+            }
+        });*/
+        return  gridLayoutManager;
     }
 
     public void changeStatusBar(Context context,int color,boolean shouldChangeStatusBarTintToDark,int type ) {
@@ -288,5 +302,35 @@ public class CommonUtil {
         }
         return mapper;
     }
+
+
+
+    public BottomSheetDialog getBottomSheet(Context context, int layout, ArrayList<RankingListModel> list, String title, MenuClickListener listener){
+
+
+
+        BottomSheetDialog bottomSheetDialog=new BottomSheetDialog(context);
+
+        bottomSheetDialog.setContentView(layout);
+
+        RecyclerView barRecycler= (RecyclerView) bottomSheetDialog.findViewById(R.id.bar_details_recycler_view);
+
+        AppCompatTextView detailsTitle= (AppCompatTextView) bottomSheetDialog.findViewById(R.id.bar_details_title);
+        if(title==null){
+            detailsTitle.setVisibility(View.GONE);
+        }else{
+            detailsTitle.setText(title);
+        }
+        barRecycler.setLayoutManager(CommonUtil.getInstance().getVerticalLayoutManager(context));
+
+        SortListAdapter adapter=new SortListAdapter(list,listener);
+
+        barRecycler.setAdapter(adapter);
+
+        bottomSheetDialog.show();
+
+        return bottomSheetDialog;
+    }
+
 
 }

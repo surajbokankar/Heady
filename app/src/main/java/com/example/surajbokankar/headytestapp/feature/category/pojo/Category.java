@@ -1,5 +1,7 @@
 package com.example.surajbokankar.headytestapp.feature.category.pojo;
 
+import android.support.annotation.NonNull;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,7 @@ import java.util.ArrayList;
 "products",
 "child_categories"
 })
-public class Category {
+public class Category   {
 
     @JsonProperty("id")
     public Integer id;
@@ -25,4 +27,6 @@ public class Category {
     public ArrayList<Product> products = null;
     @JsonProperty("child_categories")
     public ArrayList<Integer> childCategories = null;
+
+
 }
