@@ -1462,5 +1462,8 @@ public class Constant {
         String LIST="list";
     }
 
+    public interface  DETAIL_VIEW{
+        String DETAIL="detail";
+    }
 
 }

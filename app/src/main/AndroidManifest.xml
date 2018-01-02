@@ -25,6 +25,7 @@
             android:theme="@style/AppTheme.NoActionBar"
 
             ></activity>
+        <activity android:name=".feature.details.CategoryDetailActivity"/>
     </application>
 
 </manifest>

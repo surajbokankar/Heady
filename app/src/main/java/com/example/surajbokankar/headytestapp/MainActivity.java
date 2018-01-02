@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements OnCategoryAPISucc
     Context context=null;
     MenuModel menuModel=null;
     MainMenuModel listModel=null;
+    BottomSheetDialog dialog=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +85,9 @@ public class MainActivity extends AppCompatActivity implements OnCategoryAPISucc
     }
 
     private void loadSortBottomSheet() {
-        BottomSheetDialog dialog=CommonUtil.getInstance().getBottomSheet(context,R.layout.layout_bottom_sheet,menuModel.rankingListModels,"Sort",this);
+        mainBinding.menuFab.setVisibility(View.VISIBLE);
+        dialog=CommonUtil.getInstance().getBottomSheet(context,R.layout.layout_bottom_sheet,menuModel.rankingListModels,"Sort",this);
+
     }
 
     private String getMenuModel(MenuModel menuModel) {
@@ -134,10 +137,12 @@ public class MainActivity extends AppCompatActivity implements OnCategoryAPISucc
         mainBinding.menuFab.setVisibility(View.VISIBLE);
         listModel=menuModel;
         loadListFragment(menuModel);
+
+        mainBinding.bottomNavView.getMenu().getItem(0).setChecked(true);
     }
 
     private void loadListFragment(MainMenuModel menuModel) {
-
+        mainBinding.menuFab.setVisibility(View.VISIBLE);
         String response=getListResponse(menuModel);
         CategoryListFragment categoryListFragment=CategoryListFragment.getFragment(response);
         changeFragment(categoryListFragment,Constant.FRAGMENT_NAME.LIST);
@@ -148,6 +153,8 @@ public class MainActivity extends AppCompatActivity implements OnCategoryAPISucc
 
         MainMenuModel model=viewModel.getProductModel(menuModel);
         loadListFragment(model);
+        dialog.dismiss();
+        mainBinding.bottomNavView.getMenu().getItem(0).setChecked(true);
     }
 
 

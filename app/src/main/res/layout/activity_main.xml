@@ -14,6 +14,14 @@
                 android:visibility="gone"
                 />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dim_0dp"
+            android:background="@color/color_000000"
+            android:alpha=".67"
+            android:layout_above="@id/bottom_nav_view"
+            />
+
         <android.support.design.widget.BottomNavigationView
             android:layout_width="match_parent"
             android:layout_height="@dimen/dim_48dp"
@@ -32,8 +40,8 @@
             android:layout_alignParentRight="true"
             android:layout_marginBottom="@dimen/dim_56dp"
             android:layout_marginRight="@dimen/dim_16dp"
-            android:background="@drawable/ic_menu"
             android:id="@+id/menu_fab"
+            android:src="@drawable/ic_list_menu"
             />
 
 

@@ -4,8 +4,8 @@
     >
 
     <stroke
-        android:color="@color/color_FFFFFF"
-        android:width="@dimen/dim_1dp"
+        android:color="@color/color_000000"
+        android:width="@dimen/dim_0dp"
         />
 
 

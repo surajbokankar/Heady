@@ -3,7 +3,8 @@
     android:layout_width="@dimen/dim_150dp"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
 
     <RelativeLayout
@@ -13,6 +14,7 @@
         android:layout_marginRight="@dimen/dim_8dp"
         android:background="@drawable/product_background"
         android:layout_marginTop="@dimen/dim_8dp"
+        android:id="@+id/product_content_parent"
         >
 
         <com.github.pavlospt.CircleView

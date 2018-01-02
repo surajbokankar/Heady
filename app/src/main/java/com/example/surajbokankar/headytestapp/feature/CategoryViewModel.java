@@ -102,11 +102,20 @@ public class CategoryViewModel {
                             childCate.id=category.childCategories.get(i);
                             if(getChileObjectIndex(categories,childCate)>-1){
                                 int index=getChileObjectIndex(categories,childCate);
+
                                 Log.i(TAG, "createMenuResponse: Category="+index);
                                 Category childCategory=categories.get(index);
                                 childCategoryModel.childCategoryId=childCategory.id;
                                 childCategoryModel.childCategoryName=childCategory.name;
                                 childCategoryModel.childProducts=childCategory.products;
+                                childModel.add(childCategoryModel);
+                            }else{
+                                Product item=new Product();
+                                item.id=childCate.id;
+                                Product product=getProductIndex(category.products,item);
+                                childCategoryModel.childCategoryId=product.id;
+                                childCategoryModel.childCategoryName=product.name;
+                                childCategoryModel.childProducts.add(product);
                                 childModel.add(childCategoryModel);
                             }
                         }
@@ -226,6 +235,7 @@ public class CategoryViewModel {
 
         for(int i=0;i<list.size();i++){
             Category model=list.get(i);
+            Log.i(TAG, "getChileObjectIndex: Values="+model.id+"\t"+category.id);
             if(model.id==category.id){
                 index=i;
                 return index;
@@ -251,7 +261,7 @@ public class CategoryViewModel {
    }
 
 
-   public int getProductIndex(ArrayList<Product> productList,Product product){
+   public Product getProductIndex(ArrayList<Product> productList,Product product){
        Comparator<Product> productComparator = new Comparator<Product>()
        {
            public int compare(Product u1, Product u2)
@@ -262,7 +272,8 @@ public class CategoryViewModel {
 
        int index = Collections.binarySearch(productList,
                product, productComparator);
-       return index;
+
+       return productList.get(index);
    }
 
 

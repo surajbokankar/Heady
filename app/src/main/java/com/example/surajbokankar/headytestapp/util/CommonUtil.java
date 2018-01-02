@@ -31,6 +31,7 @@ import com.example.surajbokankar.headytestapp.feature.category.adapter.ChildMenu
 import com.example.surajbokankar.headytestapp.feature.category.adapter.SortListAdapter;
 import com.example.surajbokankar.headytestapp.feature.category.model.RankingListModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.pavlospt.CircleView;
 
 import java.text.DateFormat;
 import java.text.Format;
@@ -40,6 +41,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -253,12 +255,33 @@ public class CommonUtil {
 
     public long getDateFromString(String startDateString){
         long dateValue=0;
-        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+       // DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.UK);
+
+        //SimpleDateFormat format =
+
         Date startDate;
         try {
             startDate = df.parse(startDateString);
             dateValue=startDate.getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return dateValue;
+    }
 
+
+    public long getDate(String startDateString){
+        long dateValue=0;
+        // DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX");
+        SimpleDateFormat df = new SimpleDateFormat("YYYY-MM-dd");
+
+        //SimpleDateFormat format =
+
+        Date startDate;
+        try {
+            startDate = df.parse(startDateString);
+            dateValue=startDate.getTime();
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -330,6 +353,19 @@ public class CommonUtil {
         bottomSheetDialog.show();
 
         return bottomSheetDialog;
+    }
+
+    public void setProfileBackground(Context context,CircleView profileImage, String name) {
+        name= CommonUtil.getInstance().getUserName(name);
+        profileImage.setTitleText(name);
+        profileImage.setTitleColor(context.getResources().getColor(R.color.color_app_profile));
+        profileImage.setFillColor(context.getResources().getColor(R.color.color_FFFFFF));
+        profileImage.setSubtitleText("");
+        profileImage.setStrokeColor(context.getResources().getColor(R.color.color_aaaaaa));
+
+
+        /*GradientDrawable drawable = (GradientDrawable)profileImage.getBackground();
+        drawable.setColor(CustomKOLProfile.getInstance().kolProfileBackgroundColor(mContext,name));*/
     }
 
 

@@ -7,7 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.surajbokankar.headytestapp.R;
+import com.example.surajbokankar.headytestapp.feature.category.MenuClickListener;
 import com.example.surajbokankar.headytestapp.feature.category.model.ChildCategoryModel;
+import com.example.surajbokankar.headytestapp.feature.category.model.MainMenuModel;
 
 import java.util.ArrayList;
 
@@ -18,8 +20,10 @@ import java.util.ArrayList;
 public class ChildMenuAdapter extends RecyclerView.Adapter<ChildMenuAdapter.CustomHolder> {
 
     public ArrayList<ChildCategoryModel> modelList=null;
-    public ChildMenuAdapter(ArrayList<ChildCategoryModel> childList){
+    MenuClickListener listener=null;
+    public ChildMenuAdapter(ArrayList<ChildCategoryModel> childList, MenuClickListener listener){
         this.modelList=childList;
+        this.listener=listener;
     }
 
     @Override
@@ -33,8 +37,19 @@ public class ChildMenuAdapter extends RecyclerView.Adapter<ChildMenuAdapter.Cust
     @Override
     public void onBindViewHolder(CustomHolder holder, int position) {
        if(modelList!=null&&modelList.size()>0){
-           ChildCategoryModel childCategoryModel=modelList.get(position);
+           final ChildCategoryModel childCategoryModel=modelList.get(position);
            holder.childItem.setText(childCategoryModel.childCategoryName);
+
+           holder.childItem.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View view) {
+                   MainMenuModel mainMenuModel=new MainMenuModel();
+                   mainMenuModel.productList=childCategoryModel.childProducts;
+                   mainMenuModel.categoryTitle=childCategoryModel.childCategoryName;
+                   listener.onMenuClick(mainMenuModel);
+               }
+           });
+
        }
     }
 

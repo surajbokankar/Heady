@@ -1,6 +1,7 @@
 package com.example.surajbokankar.headytestapp.feature.category.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -46,7 +47,7 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.Custom
          holder.itemTitle.setText(mainMenuModel.categoryTitle);
          if(mainMenuModel.childCategoryModels!=null&&mainMenuModel.childCategoryModels.size()>0){
              holder.dropDown.setVisibility(View.VISIBLE);
-              childCategoryAdapter=new ChildMenuAdapter(mainMenuModel.childCategoryModels);
+              childCategoryAdapter=new ChildMenuAdapter(mainMenuModel.childCategoryModels,callBack);
              holder.childViewRecycler.setLayoutManager(CommonUtil.getInstance().getVerticalLayoutManager(context));
 
          }else{
@@ -57,6 +58,7 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.Custom
          holder.itemTitle.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
+                 if(mainMenuModel.productList!=null&&mainMenuModel.productList.size()>0)
                  callBack.onMenuClick(mainMenuModel);
              }
          });
@@ -69,7 +71,7 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.Custom
                      count++;
                      holder.childViewRecycler.setVisibility(View.VISIBLE);
                      holder.dropDown.setVisibility(View.VISIBLE);
-                     childCategoryAdapter=new ChildMenuAdapter(mainMenuModel.childCategoryModels);
+                     childCategoryAdapter=new ChildMenuAdapter(mainMenuModel.childCategoryModels,callBack);
                      holder.childViewRecycler.setLayoutManager(CommonUtil.getInstance().getVerticalLayoutManager(context));
                      holder.childViewRecycler.setAdapter(childCategoryAdapter);
 
@@ -90,7 +92,8 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.Custom
     }
 
     public class CustomHolder extends RecyclerView.ViewHolder {
-        AppCompatTextView itemTitle,dropDown;
+        AppCompatTextView itemTitle;
+        AppCompatImageView dropDown;
         RecyclerView childViewRecycler;
         public CustomHolder(View itemView) {
             super(itemView);
