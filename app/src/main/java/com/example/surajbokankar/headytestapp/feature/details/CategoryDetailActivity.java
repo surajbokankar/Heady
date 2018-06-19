@@ -8,7 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import com.example.surajbokankar.headytestapp.R;
 import com.example.surajbokankar.headytestapp.constant.Constant;
 import com.example.surajbokankar.headytestapp.databinding.LayoutDetailActivityBinding;
+import com.example.surajbokankar.headytestapp.feature.CategoryViewModel;
 import com.example.surajbokankar.headytestapp.feature.category.pojo.Product;
+import com.example.surajbokankar.headytestapp.feature.details.viewmodel.DetailViewModel;
 import com.example.surajbokankar.headytestapp.util.CommonUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -19,10 +21,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class CategoryDetailActivity extends AppCompatActivity {
 
     LayoutDetailActivityBinding detailActivityBinding=null;
-
     static CategoryDetailActivity detailActivity=null;
     Product product=null;
-
+    DetailViewModel viewModel=null;
 
     public static  CategoryDetailActivity getInstance(Product product){
         if(detailActivity==null){
@@ -42,7 +43,7 @@ public class CategoryDetailActivity extends AppCompatActivity {
     }
 
     private void initView() {
-
+viewModel= DetailViewModel.getModel();
         if(getIntent()!=null&&getIntent().hasExtra(Constant.DETAIL_VIEW.DETAIL)){
             try{
                 ObjectMapper objectMapper=CommonUtil.getInstance().getMapper();
@@ -54,6 +55,10 @@ public class CategoryDetailActivity extends AppCompatActivity {
         CommonUtil.getInstance().setProfileBackground(CategoryDetailActivity.this,detailActivityBinding.imageProductView,product.name);
         detailActivityBinding.titleProductText.setText(product.name);
         detailActivityBinding.subTitle.setText(product.dateAdded);
+        viewModel.getVariantList(product);
+
+
+
 
     }
 
